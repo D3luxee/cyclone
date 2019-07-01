@@ -58,22 +58,21 @@ lvlloop:
 }
 
 // cmpFlp compares a floating point value against a threshold
-func (c *Cyclone) cmpFlp(pred string, value float64, threshold int64) (bool, string) {
-	fthreshold := float64(threshold)
+func (c *Cyclone) cmpFlp(pred string, value float64, threshold float64) (bool, string) {
 	fVal := fmt.Sprintf("%.3f", value)
 	switch pred {
 	case `<`:
-		return value < fthreshold, fVal
+		return value < threshold, fVal
 	case `<=`:
-		return value <= fthreshold, fVal
+		return value <= threshold, fVal
 	case `==`:
-		return value == fthreshold, fVal
+		return value == threshold, fVal
 	case `>=`:
-		return value >= fthreshold, fVal
+		return value >= threshold, fVal
 	case `>`:
-		return value > fthreshold, fVal
+		return value > threshold, fVal
 	case `!=`:
-		return value != fthreshold, fVal
+		return value != threshold, fVal
 	default:
 		c.AppLog.Errorf(
 			"Cyclone[%d], ERROR unknown predicate: %s",
