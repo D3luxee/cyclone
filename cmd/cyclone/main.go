@@ -254,6 +254,7 @@ runloop:
 		case err := <-handlerDeath:
 			logger.Errorf("Handler died: %s", err.Error())
 			fault = true
+			os.Exit(1) // die hard, somehow this stucks after errors..
 			break runloop
 		case <-heartbeat:
 			for i := range cyclone.Handlers {
@@ -289,6 +290,8 @@ drainloop:
 		select {
 		case err := <-handlerDeath:
 			logger.Errorf("Handler died: %s", err.Error())
+			fault = true
+			os.Exit(1) // die hard, somehow this stucks after errors..
 		case <-time.After(time.Millisecond * 10):
 			break drainloop
 		}

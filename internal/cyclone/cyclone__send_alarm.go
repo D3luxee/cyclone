@@ -47,7 +47,7 @@ type alarmResult struct {
 // process evaluates a metric and raises alarms as required. Must
 // only be called as goroutine after c.delay.Use()
 func (c *Cyclone) sendAlarm(a AlarmEvent, trackingID string) {
-	//rate limit the amount of events sent to cams
+	//rate limit the amount of events sent
 	// ok events every 3h and !=ok every 3min
 	switch a.Level {
 	case 0:
